@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-todo-header',
@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './todo-header.component.scss'
 })
 export class TodoHeaderComponent {
-
+@Input() headerTitle: string = '';
 }
