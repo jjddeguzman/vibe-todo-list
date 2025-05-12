@@ -1,14 +1,36 @@
-<div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-3 sm:p-4 rounded-lg bg-gray-800/80 border border-gray-700 transition-colors duration-200">
+<div
+  *ngFor="let todo of todoLists"
+  class="flex flex-col sm:flex-row items-center justify-between gap-4 p-3 sm:p-4 rounded-lg bg-gray-800/80 border border-gray-700 transition-colors duration-200"
+>
   <div class="flex items-center gap-4">
     <input
       type="checkbox"
       class="h-5 w-5 rounded border-gray-600 text-blue-400 focus:ring-blue-500"
-      />
-      <!-- [checked]="todo.completed"
+    />
+    <!-- [checked]="todo.completed"
       (change)="toggleComplete()" -->
-    <span  class="text-white">{{ "Learn Angular" }}</span>
+    <span class="text-white">{{ todo.title }}</span>
   </div>
-  <button class="text-gray-400 hover:text-red-500 transition-colors duration-200">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2 w-5 h-5"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+  <button
+    class="text-gray-400 hover:text-red-500 transition-colors duration-200"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="lucide lucide-trash-2 w-5 h-5"
+    >
+      <path d="M3 6h18" />
+      <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+      <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+      <path d="M10 11v6" />
+      <path d="M14 11v6" />
+    </svg>
   </button>
 </div>

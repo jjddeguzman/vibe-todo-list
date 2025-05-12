@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ITodoItem } from '../../models/todo.model';
 
 @Component({
   selector: 'app-todo-item',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule, FormsModule, CommonModule],
   templateUrl: './todo-item.component.html',
-  styleUrl: './todo-item.component.scss'
+  styleUrl: './todo-item.component.scss',
 })
 export class TodoItemComponent {
-
+  @Input() todoLists: ITodoItem[];
 }
