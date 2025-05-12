@@ -1,3 +1,4 @@
+import { Observable, of } from 'rxjs';
 import {
   AbstractControl,
   FormBuilder,
@@ -10,11 +11,13 @@ import { TodoHeaderComponent } from '../../components/todo-header/todo-header.co
 import { TodoInputComponent } from '../../components/todo-input/todo-input.component';
 import { TodoItemComponent } from '../../components/todo-item/todo-item.component';
 import { ITodoItem } from '../../models/todo.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-todo-list',
   standalone: true,
   imports: [
+    CommonModule,
     TodoHeaderComponent,
     TodoInputComponent,
     TodoItemComponent,
@@ -45,7 +48,7 @@ export class TodoListComponent implements OnInit {
   }
 
   getTodoLists(): void {
-    this.todoLists = [
+    const mockData = [
       {
         id: 0,
         title: 'Learn Angular',
@@ -59,6 +62,10 @@ export class TodoListComponent implements OnInit {
         isCompleted: false,
       },
     ];
+    let mockTodoList: Observable<ITodoItem[]> = of(mockData);
+    mockTodoList.subscribe((todoLists) => {
+      this.todoLists = todoLists;
+    });
   }
 
   onAddClick(): void {
