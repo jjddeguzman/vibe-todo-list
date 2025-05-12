@@ -14,7 +14,7 @@ export class TodoSandbox {
   constructor(private store: Store<ITodoState>) {}
 
   loadTodos(): void {
-    const getTodos  = TodoActions.getTodos();
+    const getTodos = TodoActions.GET_TODOS();
     this.store.dispatch(getTodos);
   }
 
@@ -23,7 +23,7 @@ export class TodoSandbox {
     this.store.dispatch(TodoActions.addTodo(singleTodo));
   }
 
-  deleteTodo(id: any){
+  deleteTodo(id: any) {
     const singleId = { id };
     this.store.dispatch(TodoActions.deleteTodo(singleId));
   }

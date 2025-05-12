@@ -1,3 +1,4 @@
+import { GET_TODOS_Success } from './todo.actions';
 // todo.effects.ts
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -12,13 +13,13 @@ export class TodoEffects {
 
   getTodos$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(TodoActions.getTodos),
+      ofType(TodoActions.GET_TODOS),
       mergeMap(() =>
         this.todoService.getTodos().pipe(
           // If there is list of todos return the todos
-          map((todos) => TodoActions.getTodosSuccess({ todos })),
+          map((todos) => TodoActions.GET_TODOS_Success({ todos })),
           // else catch error return error
-          catchError((error) => of(TodoActions.getTodosFailure({ error })))
+          catchError((error) => of(TodoActions.GET_TODOS_Failure({ error })))
         )
       )
     )

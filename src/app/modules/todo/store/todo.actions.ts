@@ -2,12 +2,12 @@ import { createAction, props } from '@ngrx/store';
 import { ITodo } from '../models/todo.model';
 
 // * get all todos part
-export const getTodos = createAction('[Todo] Get Todos');
-export const getTodosSuccess = createAction(
+export const GET_TODOS = createAction('[Todo] Get Todos');
+export const GET_TODOS_Success = createAction(
   '[Todo] Get Todos Success',
   props<{ todos: ITodo[] }>()
 );
-export const getTodosFailure = createAction(
+export const GET_TODOS_Failure = createAction(
   '[Todo] Get Todos Failure',
   props<{ error: any }>()
 );
@@ -47,5 +47,10 @@ export const deleteTodoFailure = createAction(
 // * delete all todo
 
 export const deleteAllTodos = createAction('[Todo] Delete All Todos');
-export const deleteAllTodosSuccess = createAction('[Todo] Delete All Todos Success');
-export const deleteAllTodosFailure = createAction('[Todo] Delete All Todos Failure', props<{ error: any }>());
+export const deleteAllTodosSuccess = createAction(
+  '[Todo] Delete All Todos Success'
+);
+export const deleteAllTodosFailure = createAction(
+  '[Todo] Delete All Todos Failure',
+  props<{ error: any }>()
+);

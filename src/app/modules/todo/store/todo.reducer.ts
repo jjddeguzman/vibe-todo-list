@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import * as TodoActions from './todo.actions';
+import * as TODO_ACTIONS from './todo.actions';
 import { ITodo, ITodoState } from '../models/todo.model';
 
 export const initialState: ITodoState = {
@@ -11,21 +11,21 @@ export const initialState: ITodoState = {
 const _todoReducer = createReducer(
   initialState,
   // * This is where you call the function
-  on(TodoActions.getTodos, (state) => getTodosReducer(state)),
-  on(TodoActions.getTodosSuccess, (state, { todos }) =>
+  on(TODO_ACTIONS.GET_TODOS, (state) => getTodosReducer(state)),
+  on(TODO_ACTIONS.GET_TODOS_Success, (state, { todos }) =>
     getTodosSuccessReducer(state, todos)
   ),
-  on(TodoActions.getTodosFailure, (state, { error }) =>
+  on(TODO_ACTIONS.GET_TODOS_Failure, (state, { error }) =>
     getTodosFailureReducer(state, error)
   ),
-  // on(TodoActions.addTodo, (state, { todo }) => addTodoReducer(state, todo)),
-  on(TodoActions.addTodoSuccess, (state, { todo }) =>
+  // on(TODO_ACTIONS.addTodo, (state, { todo }) => addTodoReducer(state, todo)),
+  on(TODO_ACTIONS.addTodoSuccess, (state, { todo }) =>
     addTodoSuccessReducer(state, todo)
   ),
-  on(TodoActions.deleteTodoSuccess, (state, { id }) =>
+  on(TODO_ACTIONS.deleteTodoSuccess, (state, { id }) =>
     deleteTodoSuccessReducer(state, id)
   ),
-  on(TodoActions.deleteAllTodosSuccess, (state) =>
+  on(TODO_ACTIONS.deleteAllTodosSuccess, (state) =>
     deleteAllTodoSuccessReducer(state)
   )
 );

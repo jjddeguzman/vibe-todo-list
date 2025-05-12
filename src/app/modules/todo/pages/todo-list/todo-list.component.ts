@@ -58,35 +58,11 @@ export class TodoListComponent implements OnInit, OnDestroy {
   }
 
   getTodoLists(): void {
-    const mockData = [
-      {
-        id: 0,
-        title: 'Learn Angular',
-        description: '',
-        isCompleted: false,
-      },
-      {
-        id: 1,
-        title: 'Do the dishes',
-        description: '',
-        isCompleted: false,
-      },
-      {
-        id: 2,
-        title: 'Go to the gym',
-        description: '',
-        isCompleted: false,
-      },
-    ];
-    let mockTodoList: Observable<ITodo[]> = of(mockData);
-    mockTodoList.pipe(takeUntil(this.destroy$)).subscribe((todoLists) => {
-      this.todoLists = todoLists;
-    });
     this.todoSanbox.loadTodos();
     this.todoSanbox.todos$
       .pipe(takeUntil(this.destroy$))
       .subscribe((todos: ITodo[]) => {
-        console.log(todos, 'todos');
+        this.todoLists = todos;
       });
   }
 

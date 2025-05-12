@@ -20,9 +20,14 @@ export class TodoService {
   getTodos(): Observable<ITodo[]> {
     if (this.isMock) {
       return of([
-        { id: 1, title: 'Todo 1', description: '', isCompleted: false },
-        { id: 2, title: 'Todo 2', description: '', isCompleted: true },
-        { id: 3, title: 'Todo 3', description: '', isCompleted: false },
+        { id: 1, title: 'Learn Angular', description: '', isCompleted: false },
+        {
+          id: 2,
+          title: 'Touch some grass',
+          description: '',
+          isCompleted: true,
+        },
+        { id: 3, title: 'Go to the gym', description: '', isCompleted: false },
       ]);
     }
     return this.http.get<ITodo[]>(this.baseUrl);
