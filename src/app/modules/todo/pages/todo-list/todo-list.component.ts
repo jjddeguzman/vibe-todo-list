@@ -5,10 +5,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { TodoFooterComponent } from '../../todo/components/todo-footer/todo-footer.component';
-import { TodoHeaderComponent } from '../../todo/components/todo-header/todo-header.component';
-import { TodoInputComponent } from '../../todo/components/todo-input/todo-input.component';
-import { TodoItemComponent } from '../../todo/components/todo-item/todo-item.component';
+import { TodoFooterComponent } from '../../components/todo-footer/todo-footer.component';
+import { TodoHeaderComponent } from '../../components/todo-header/todo-header.component';
+import { TodoInputComponent } from '../../components/todo-input/todo-input.component';
+import { TodoItemComponent } from '../../components/todo-item/todo-item.component';
 
 @Component({
   selector: 'app-todo-list',
@@ -37,7 +37,7 @@ export class TodoListComponent implements OnInit {
     return this.inputForm?.get('whatNeedsToBeDone');
   }
 
-  onAdd(): void {
+  onAddClick(): void {
     if (this.inputForm.valid) {
       console.log(this.whatNeedsToBeDone.value);
       this.inputForm.reset();

@@ -16,8 +16,11 @@ import {
 })
 export class TodoInputComponent {
   @Input() inputForm: FormGroup;
-  @Input() whatNeedsToBeDone: AbstractControl;
   @Output() onAddClickEvent: EventEmitter<any> = new EventEmitter();
+
+  get whatNeedsToBeDone(): any {
+    return this.inputForm.get('whatNeedsToBeDone');
+  }
 
   onAdd(): void {
     this.onAddClickEvent.emit();
