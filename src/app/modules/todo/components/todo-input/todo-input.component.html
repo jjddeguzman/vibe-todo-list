@@ -1,13 +1,16 @@
-<div class="flex flex-col sm:flex-row gap-3 mb-6">
+<form [formGroup]="inputForm" class="flex flex-col sm:flex-row gap-3 mb-6">
   <input
+    [formControl]="whatNeedsToBeDone"
     type="text"
     placeholder="What needs to be done?"
     class="bg-gray-800/80 text-white border-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 rounded-md py-2 px-4"
   />
   <button
+    (click)="onAdd()"
+    type="submit"
     class="bg-blue-500/90 hover:bg-blue-500 text-white font-semibold px-4 sm:px-6 py-2 sm:py-3 rounded-md transition-colors duration-200 shadow-md hover:shadow-lg flex items-center gap-2"
-    >
+  >
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-circle w-5 h-5"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
     Add
   </button>
-</div>
+</form>
