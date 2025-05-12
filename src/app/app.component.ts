@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { TodoComponent } from './modules/todo/todo.component';
+import { TodoModule } from './modules/todo/todo.module';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, TodoModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
