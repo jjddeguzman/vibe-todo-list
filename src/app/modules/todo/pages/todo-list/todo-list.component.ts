@@ -69,4 +69,15 @@ export class TodoListComponent implements OnInit {
       alert('Add a todo');
     }
   }
+
+  onCheckTodo(todo: ITodoItem): void {
+    console.log(todo, 'checked');
+    // TODO create sandbox for updating the todo item
+  }
+
+  onDeleteTodo(id: number | string): void {
+    console.log(id, 'deleted');
+
+    // TODO create sandbox for deleting the todo item
+  }
 }

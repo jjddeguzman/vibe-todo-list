@@ -7,7 +7,11 @@
     (onAddClickEvent)="onAddClick()"
   ></app-todo-input>
   <div class="space-y-3 mb-6">
-    <app-todo-item [todoLists]="todoLists"></app-todo-item>
+    <app-todo-item
+      [todoLists]="todoLists"
+      (onCheckTodoEvent)="onCheckTodo($event)"
+      (onDeleteTodoEvent)="onDeleteTodo($event)"
+    ></app-todo-item>
   </div>
   <app-todo-footer></app-todo-footer>
 </div>

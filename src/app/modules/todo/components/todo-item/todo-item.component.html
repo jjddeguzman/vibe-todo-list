@@ -4,14 +4,16 @@
 >
   <div class="flex items-center gap-4">
     <input
+      id="myCheckbox"
+      (click)="onCheckTodo(todo)"
       type="checkbox"
       class="h-5 w-5 rounded border-gray-600 text-blue-400 focus:ring-blue-500"
     />
-    <!-- [checked]="todo.completed"
-      (change)="toggleComplete()" -->
     <span class="text-white">{{ todo.title }}</span>
   </div>
   <button
+    (click)="onDeleteTodo(todo.id)"
+    type="button"
     class="text-gray-400 hover:text-red-500 transition-colors duration-200"
   >
     <svg
