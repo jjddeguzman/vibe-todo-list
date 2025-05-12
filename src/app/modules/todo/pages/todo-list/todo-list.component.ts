@@ -1,11 +1,11 @@
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject, takeUntil } from 'rxjs';
 import {
   AbstractControl,
   FormBuilder,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TodoFooterComponent } from '../../components/todo-footer/todo-footer.component';
 import { TodoHeaderComponent } from '../../components/todo-header/todo-header.component';
 import { TodoInputComponent } from '../../components/todo-input/todo-input.component';
@@ -26,15 +26,21 @@ import { CommonModule } from '@angular/common';
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.scss',
 })
-export class TodoListComponent implements OnInit {
+export class TodoListComponent implements OnInit, OnDestroy {
   inputForm: FormGroup;
   todoLists: ITodoItem[];
+  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.initializeForms();
     this.getTodoLists();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   get whatNeedsToBeDone(): AbstractControl {
@@ -69,7 +75,7 @@ export class TodoListComponent implements OnInit {
       },
     ];
     let mockTodoList: Observable<ITodoItem[]> = of(mockData);
-    mockTodoList.subscribe((todoLists) => {
+    mockTodoList.pipe(takeUntil(this.destroy$)).subscribe((todoLists) => {
       this.todoLists = todoLists;
     });
   }
