@@ -10,8 +10,9 @@ import { TodoFooterComponent } from '../../components/todo-footer/todo-footer.co
 import { TodoHeaderComponent } from '../../components/todo-header/todo-header.component';
 import { TodoInputComponent } from '../../components/todo-input/todo-input.component';
 import { TodoItemComponent } from '../../components/todo-item/todo-item.component';
-import { ITodoItem } from '../../models/todo.model';
+import { ITodo } from '../../models/todo.model';
 import { CommonModule } from '@angular/common';
+import { TodoSandbox } from '../../store/todo.sandbox';
 
 @Component({
   selector: 'app-todo-list',
@@ -28,10 +29,13 @@ import { CommonModule } from '@angular/common';
 })
 export class TodoListComponent implements OnInit, OnDestroy {
   inputForm: FormGroup;
-  todoLists: ITodoItem[];
+  todoLists: ITodo[];
   private destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private todoSanbox: TodoSandbox
+  ) {}
 
   ngOnInit(): void {
     this.initializeForms();
@@ -74,15 +78,21 @@ export class TodoListComponent implements OnInit, OnDestroy {
         isCompleted: false,
       },
     ];
-    let mockTodoList: Observable<ITodoItem[]> = of(mockData);
+    let mockTodoList: Observable<ITodo[]> = of(mockData);
     mockTodoList.pipe(takeUntil(this.destroy$)).subscribe((todoLists) => {
       this.todoLists = todoLists;
     });
+    this.todoSanbox.loadTodos();
+    this.todoSanbox.todos$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((todos: ITodo[]) => {
+        console.log(todos, 'todos');
+      });
   }
 
   onAddClick(): void {
     if (this.inputForm.valid) {
-      const newTodo: ITodoItem = {
+      const newTodo: ITodo = {
         id: this.todoLists.length,
         title: this.whatNeedsToBeDone.value,
         description: '',
@@ -96,7 +106,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
     }
   }
 
-  onCheckTodo(todo: ITodoItem): void {
+  onCheckTodo(todo: ITodo): void {
     console.log(todo, 'checked');
     // TODO create sandbox for updating the todo item
   }

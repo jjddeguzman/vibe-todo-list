@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ITodoItem } from '../../models/todo.model';
+import { ITodo } from '../../models/todo.model';
 
 @Component({
   selector: 'app-todo-item',
@@ -11,12 +11,12 @@ import { ITodoItem } from '../../models/todo.model';
   styleUrl: './todo-item.component.scss',
 })
 export class TodoItemComponent {
-  @Input() todoLists: ITodoItem[];
+  @Input() todoLists: ITodo[];
   @Output() onCheckTodoEvent: EventEmitter<any> = new EventEmitter();
   @Output() onDeleteTodoEvent: EventEmitter<any> = new EventEmitter();
   isChecked: boolean = false;
 
-  onCheckTodo(todo: ITodoItem): void {
+  onCheckTodo(todo: ITodo): void {
     const checkbox = document.getElementById('myCheckbox') as HTMLInputElement;
     const checkBoxChecked = checkbox.checked;
     this.onCheckTodoEvent.emit({ ...todo, isCompleted: checkBoxChecked });
