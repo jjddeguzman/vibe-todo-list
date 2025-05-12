@@ -13,5 +13,5 @@
       (onDeleteTodoEvent)="onDeleteTodo($event)"
     ></app-todo-item>
   </div>
-  <app-todo-footer></app-todo-footer>
+  <app-todo-footer [itemCount]="todoLists.length"></app-todo-footer>
 </div>
