@@ -61,6 +61,12 @@ export class TodoListComponent implements OnInit {
         description: '',
         isCompleted: false,
       },
+      {
+        id: 2,
+        title: 'Go to the gym',
+        description: '',
+        isCompleted: false,
+      },
     ];
     let mockTodoList: Observable<ITodoItem[]> = of(mockData);
     mockTodoList.subscribe((todoLists) => {
@@ -70,6 +76,13 @@ export class TodoListComponent implements OnInit {
 
   onAddClick(): void {
     if (this.inputForm.valid) {
+      const newTodo: ITodoItem = {
+        id: this.todoLists.length,
+        title: this.whatNeedsToBeDone.value,
+        description: '',
+        isCompleted: false,
+      };
+      this.todoLists.push(newTodo);
       console.log(this.whatNeedsToBeDone.value);
       this.inputForm.reset();
     } else {
@@ -84,7 +97,7 @@ export class TodoListComponent implements OnInit {
 
   onDeleteTodo(id: number | string): void {
     console.log(id, 'deleted');
-
+    this.todoLists = this.todoLists.filter((todo) => todo.id !== id);
     // TODO create sandbox for deleting the todo item
   }
 }
