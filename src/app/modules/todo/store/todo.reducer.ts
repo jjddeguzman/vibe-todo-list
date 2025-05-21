@@ -10,71 +10,63 @@ export const initialState: ITodoState = {
 
 const _todoReducer = createReducer(
   initialState,
-  // * This is where you call the function
-  on(TODO_ACTIONS.GET_TODOS, (state) => getTodosReducer(state)),
-  on(TODO_ACTIONS.GET_TODOS_Success, (state, { todos }) =>
-    getTodosSuccessReducer(state, todos)
-  ),
-  on(TODO_ACTIONS.GET_TODOS_Failure, (state, { error }) =>
-    getTodosFailureReducer(state, error)
-  ),
-  // on(TODO_ACTIONS.addTodo, (state, { todo }) => addTodoReducer(state, todo)),
-  on(TODO_ACTIONS.addTodoSuccess, (state, { todo }) =>
-    addTodoSuccessReducer(state, todo)
-  ),
-  on(TODO_ACTIONS.deleteTodoSuccess, (state, { id }) =>
-    deleteTodoSuccessReducer(state, id)
-  ),
-  on(TODO_ACTIONS.deleteAllTodosSuccess, (state) =>
-    deleteAllTodoSuccessReducer(state)
-  )
-);
 
-/*
-  This part is for setting the logic and getting all the todos from network
-  You should always add a success / fail for API Calls
-*/
-function getTodosReducer(state: ITodoState): ITodoState {
-  return { ...state, loading: true };
-}
-
-function getTodosSuccessReducer(state: ITodoState, todos: ITodo[]): ITodoState {
-  return { ...state, todos, loading: false, error: null };
-}
-
-function getTodosFailureReducer(state: ITodoState, error: any): ITodoState {
-  return { ...state, loading: false, error };
-}
-
-/* This part is for post request to api */
-function addTodoSuccessReducer(state: ITodoState, newTodo: ITodo): ITodoState {
-  return {
+  // * Get Todos
+  on(TODO_ACTIONS.GET_TODOS, (state) => ({
     ...state,
-    todos: [...state.todos, newTodo],
-  };
-}
+    loading: true,
+  })),
 
-function deleteAllTodoSuccessReducer(state: ITodoState): ITodoState {
-  return {
+  on(TODO_ACTIONS.GET_TODOS_Success, (state, { todos }) => ({
     ...state,
-    todos: [],
-  };
-}
+    todos,
+    loading: false,
+    error: null,
+  })),
 
-// function addTodoReducer(state: ITodoState, newTodo: ITodo): ITodoState {
-//   return { ...state, todos: [...state.todos, newTodo] };
-// }
+  on(TODO_ACTIONS.GET_TODOS_Failure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  })),
 
-/* This part is for delete request to api */
+  // * Add Todo
+  // Note: If you have an addTodo action (without 'Success'), you'd handle it here
+  // on(TODO_ACTIONS.addTodo, (state, { todo }) => ({
+  //   ...state,
+  //   // Potentially add a 'saving' flag or similar
+  // })),
+  on(TODO_ACTIONS.addTodoSuccess, (state, { todo }) => ({
+    ...state,
+    todos: [...state.todos, todo],
+  })),
+  on(TODO_ACTIONS.addTodoFailure, (state, { error }) => ({
+    ...state,
+    error: error, // Assuming you have an addTodoFailure action now
+  })),
 
-function deleteTodoSuccessReducer(state: ITodoState, id: any) {
-  return {
+  // * Delete Todo
+  on(TODO_ACTIONS.deleteTodoSuccess, (state, { id }) => ({
     ...state,
     todos: state.todos.filter((todo) => todo.id !== id),
-  };
-}
+  })),
+  on(TODO_ACTIONS.deleteTodoFailure, (state, { error }) => ({
+    ...state,
+    error: error, // Assuming you have a deleteTodoFailure action now
+  })),
 
-/* This part is being called in the app module */
+  // * Delete All Todos
+  on(TODO_ACTIONS.deleteAllTodosSuccess, (state) => ({
+    ...state,
+    todos: [],
+  })),
+  on(TODO_ACTIONS.deleteAllTodosFailure, (state, { error }) => ({
+    ...state,
+    error: error, // Assuming you have a deleteAllTodosFailure action now
+  }))
+);
+
+// This part is being called in the app module
 export function todoReducer(state: ITodoState | undefined, action: Action) {
   return _todoReducer(state, action);
 }
