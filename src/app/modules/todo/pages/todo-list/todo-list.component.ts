@@ -40,6 +40,14 @@ export class TodoListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initializeForms();
     this.getTodoLists();
+    this.initializeFormAndStoreSubscriptions();
+  }
+  initializeFormAndStoreSubscriptions() {
+    this.todoSanbox.todos$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((todos: ITodo[]) => {
+        this.todoLists = todos;
+      });
   }
 
   ngOnDestroy(): void {
@@ -59,11 +67,6 @@ export class TodoListComponent implements OnInit, OnDestroy {
 
   getTodoLists(): void {
     this.todoSanbox.loadTodos();
-    this.todoSanbox.todos$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((todos: ITodo[]) => {
-        this.todoLists = todos;
-      });
   }
 
   onAddClick(): void {

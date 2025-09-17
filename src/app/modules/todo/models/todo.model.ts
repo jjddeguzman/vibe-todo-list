@@ -8,5 +8,5 @@ export interface ITodo {
 export interface ITodoState {
   todos: ITodo[];
   loading: boolean;
-  error: any;
+  error: string | null;
 }
