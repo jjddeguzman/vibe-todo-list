@@ -1,0 +1,22 @@
+{
+    "todos": [
+        {
+          "id": 1,
+          "title": "Learn Angular",
+          "description": "",
+          "isCompleted": false
+        },
+        {
+          "id": 2,
+          "title": "Touch some grass",
+          "description": "",
+          "isCompleted": true
+        },
+        {
+          "id": 3,
+          "title": "Go to the gym",
+          "description": "",
+          "isCompleted": false
+        }
+      ]
+  }

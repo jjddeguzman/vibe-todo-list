@@ -8,12 +8,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root',
 })
 export class TodoService {
-  // TODO: update baseUrl via backend data => SOON
-  private baseUrl: string = '/api/data';
+  private baseUrl: string = 'http://localhost:3000/todos';
   private headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
   });
-  private isMock: boolean = true;
+  private isMock: boolean = false;
 
   constructor(private http: HttpClient) {}
 
