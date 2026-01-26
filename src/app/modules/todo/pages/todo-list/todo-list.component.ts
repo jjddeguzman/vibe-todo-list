@@ -1,4 +1,4 @@
-import { Observable, of, Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import {
   AbstractControl,
   FormBuilder,
@@ -72,13 +72,12 @@ export class TodoListComponent implements OnInit, OnDestroy {
   onAddClick(): void {
     if (this.inputForm.valid) {
       const newTodo: ITodo = {
-        id: this.todoLists.length,
+        id: crypto.randomUUID(),
         title: this.whatNeedsToBeDone.value,
         description: '',
         isCompleted: false,
       };
-      this.todoLists.push(newTodo);
-      console.log(this.whatNeedsToBeDone.value);
+      this.todoSanbox.addTodo(newTodo);
       this.inputForm.reset();
     } else {
       alert('Add a todo');
@@ -91,8 +90,9 @@ export class TodoListComponent implements OnInit, OnDestroy {
   }
 
   onDeleteTodo(id: number | string): void {
-    console.log(id, 'deleted');
-    this.todoLists = this.todoLists.filter((todo) => todo.id !== id);
+    // console.log(id, 'deleted');
+    // this.todoLists = this.todoLists.filter((todo) => todo.id !== id);
     // TODO create sandbox for deleting the todo item
+    this.todoSanbox.deleteTodo(id);
   }
 }
