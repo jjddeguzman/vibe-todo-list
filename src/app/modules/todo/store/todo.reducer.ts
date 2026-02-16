@@ -3,9 +3,9 @@ import * as TODO_ACTIONS from './todo.actions';
 import { ITodo, ITodoState } from '../models/todo.model';
 
 export const initialState: ITodoState = {
-  todos: [],
+  todos: [] as ITodo[],
   loading: false,
-  error: null,
+  error: null as any,
 };
 
 const _todoReducer = createReducer(
@@ -63,7 +63,7 @@ const _todoReducer = createReducer(
   on(TODO_ACTIONS.deleteAllTodosFailure, (state, { error }) => ({
     ...state,
     error: error, // Assuming you have a deleteAllTodosFailure action now
-  }))
+  })),
 );
 
 // This part is being called in the app module
