@@ -34,7 +34,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
 
   constructor(
     private formBuilder: FormBuilder,
-    private todoSanbox: TodoSandbox
+    private todoSanbox: TodoSandbox,
   ) {}
 
   ngOnInit(): void {
