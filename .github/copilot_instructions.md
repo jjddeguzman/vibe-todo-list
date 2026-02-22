@@ -51,6 +51,7 @@ src/app/modules/
 - **Classes**: Use PascalCase (e.g., `TodoService`, `UserComponent`)
 - **Enums**: Use PascalCase (e.g., `TodoStatus`, `UserRole`)
 - **Functions & Variables**: Use camelCase (e.g., `getTodos()`, `handleClick()`, `todoList`, `isLoading`)
+- **Meaningful Names**: Use descriptive, self-explanatory names so the purpose is clear without needing comments (e.g., `calculateTotalPrice()` instead of `calc()`, `isUserLoggedIn` instead of `status`)
 
 ### ⚙️ Component Rules (MUST)
 
