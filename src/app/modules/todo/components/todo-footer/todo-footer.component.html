@@ -7,17 +7,26 @@
   <!-- Filter Buttons -->
   <div class="flex items-center justify-center gap-6">
     <button
-      class="text-gray-400 hover:text-white transition-colors duration-200 font-medium"
+      (click)="onFilterClick('all')"
+      [class.text-white]="activeFilter === 'all'"
+      [class.text-gray-400]="activeFilter !== 'all'"
+      class="hover:text-white transition-colors duration-200 font-medium"
     >
       All
     </button>
     <button
-      class="text-gray-400 hover:text-white transition-colors duration-200 font-medium"
+      (click)="onFilterClick('active')"
+      [class.text-white]="activeFilter === 'active'"
+      [class.text-gray-400]="activeFilter !== 'active'"
+      class="hover:text-white transition-colors duration-200 font-medium"
     >
       Active
     </button>
     <button
-      class="text-gray-400 hover:text-white transition-colors duration-200 font-medium"
+      (click)="onFilterClick('completed')"
+      [class.text-white]="activeFilter === 'completed'"
+      [class.text-gray-400]="activeFilter !== 'completed'"
+      class="hover:text-white transition-colors duration-200 font-medium"
     >
       Completed
     </button>
@@ -25,6 +34,7 @@
 
   <!-- Clear Completed -->
   <button
+    (click)="onClearCompleted()"
     class="text-gray-400 hover:text-red-500 transition-colors duration-200 font-medium min-w-max"
   >
     Clear completed

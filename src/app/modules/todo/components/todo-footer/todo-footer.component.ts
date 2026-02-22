@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FilterType } from '../../types/filter.types';
 
 @Component({
   selector: 'app-todo-footer',
@@ -9,4 +10,15 @@ import { Component, Input } from '@angular/core';
 })
 export class TodoFooterComponent {
   @Input() itemCount: number;
+  @Input() activeFilter: FilterType = 'all';
+  @Output() onFilterChangeEvent: EventEmitter<FilterType> = new EventEmitter();
+  @Output() onClearCompletedEvent: EventEmitter<void> = new EventEmitter();
+
+  onFilterClick(filter: FilterType): void {
+    this.onFilterChangeEvent.emit(filter);
+  }
+
+  onClearCompleted(): void {
+    this.onClearCompletedEvent.emit();
+  }
 }

@@ -8,13 +8,16 @@
   ></app-todo-input>
   <div class="space-y-3 mb-6">
     <app-todo-item
-      [todoLists]="todoLists"
+      [todoLists]="filteredTodoLists"
       (onCheckTodoEvent)="onCheckTodo($event)"
       (onDeleteTodoEvent)="onDeleteTodo($event)"
     ></app-todo-item>
   </div>
   <app-todo-footer
     [itemCount]="todoLists.length"
+    [activeFilter]="activeFilter"
+    (onFilterChangeEvent)="onFilterChange($event)"
+    (onClearCompletedEvent)="onClearCompleted()"
     class="mt-auto"
   ></app-todo-footer>
 </div>

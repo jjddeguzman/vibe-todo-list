@@ -4,12 +4,20 @@
 >
   <div class="flex items-center gap-4">
     <input
-      id="myCheckbox"
-      (click)="onCheckTodo(todo)"
+      [id]="'checkbox-' + todo.id"
+      [checked]="todo.isCompleted"
+      (change)="onCheckTodo(todo)"
       type="checkbox"
       class="h-5 w-5 rounded border-gray-600 text-blue-400 focus:ring-blue-500"
     />
-    <span class="text-white">{{ todo.title }}</span>
+    <span
+      class="transition-colors duration-200"
+      [class.text-white]="!todo.isCompleted"
+      [class.text-gray-500]="todo.isCompleted"
+      [class.line-through]="todo.isCompleted"
+    >
+      {{ todo.title }}
+    </span>
   </div>
   <button
     (click)="onDeleteTodo(todo.id)"

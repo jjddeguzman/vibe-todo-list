@@ -13,6 +13,7 @@ import { TodoItemComponent } from '../../components/todo-item/todo-item.componen
 import { ITodo } from '../../models/todo.model';
 import { CommonModule } from '@angular/common';
 import { TodoSandbox } from '../../store/todo.sandbox';
+import { FilterType } from '../../types/filter.types';
 
 @Component({
   selector: 'app-todo-list',
@@ -30,6 +31,8 @@ import { TodoSandbox } from '../../store/todo.sandbox';
 export class TodoListComponent implements OnInit, OnDestroy {
   inputForm: FormGroup;
   todoLists: ITodo[];
+  filteredTodoLists: ITodo[] = [];
+  activeFilter: FilterType = 'all';
   private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
@@ -42,11 +45,13 @@ export class TodoListComponent implements OnInit, OnDestroy {
     this.getTodoLists();
     this.initializeFormAndStoreSubscriptions();
   }
+
   initializeFormAndStoreSubscriptions() {
     this.todoSanbox.todos$
       .pipe(takeUntil(this.destroy$))
       .subscribe((todos: ITodo[]) => {
         this.todoLists = todos;
+        this.applyFilter(this.activeFilter);
       });
   }
 
@@ -85,14 +90,50 @@ export class TodoListComponent implements OnInit, OnDestroy {
   }
 
   onCheckTodo(todo: ITodo): void {
-    console.log(todo, 'checked');
-    // TODO create sandbox for updating the todo item
+    const todoIndex = this.todoLists.findIndex((t) => t.id === todo.id);
+    if (todoIndex !== -1) {
+      // Create a new array to trigger change detection
+      const updatedTodos = [...this.todoLists];
+      updatedTodos[todoIndex] = {
+        ...updatedTodos[todoIndex],
+        isCompleted: !updatedTodos[todoIndex].isCompleted,
+      };
+      this.todoLists = updatedTodos;
+      this.applyFilter(this.activeFilter);
+    }
   }
 
   onDeleteTodo(id: number | string): void {
-    // console.log(id, 'deleted');
-    // this.todoLists = this.todoLists.filter((todo) => todo.id !== id);
-    // TODO create sandbox for deleting the todo item
     this.todoSanbox.deleteTodo(id);
+  }
+
+  onFilterChange(filter: FilterType): void {
+    this.activeFilter = filter;
+    this.applyFilter(filter);
+  }
+
+  private applyFilter(filter: FilterType): void {
+    switch (filter) {
+      case 'active':
+        this.filteredTodoLists = this.todoLists.filter(
+          (todo) => !todo.isCompleted,
+        );
+        break;
+      case 'completed':
+        this.filteredTodoLists = this.todoLists.filter(
+          (todo) => todo.isCompleted,
+        );
+        break;
+      case 'all':
+      default:
+        this.filteredTodoLists = [...this.todoLists];
+    }
+  }
+
+  onClearCompleted(): void {
+    const completedIds = this.todoLists
+      .filter((todo) => todo.isCompleted)
+      .map((todo) => todo.id);
+    completedIds.forEach((id) => this.todoSanbox.deleteTodo(id));
   }
 }

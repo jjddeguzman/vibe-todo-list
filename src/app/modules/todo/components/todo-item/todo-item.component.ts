@@ -12,14 +12,11 @@ import { ITodo } from '../../models/todo.model';
 })
 export class TodoItemComponent {
   @Input() todoLists: ITodo[];
-  @Output() onCheckTodoEvent: EventEmitter<any> = new EventEmitter();
+  @Output() onCheckTodoEvent: EventEmitter<ITodo> = new EventEmitter();
   @Output() onDeleteTodoEvent: EventEmitter<any> = new EventEmitter();
-  isChecked: boolean = false;
 
   onCheckTodo(todo: ITodo): void {
-    const checkbox = document.getElementById('myCheckbox') as HTMLInputElement;
-    const checkBoxChecked = checkbox.checked;
-    this.onCheckTodoEvent.emit({ ...todo, isCompleted: checkBoxChecked });
+    this.onCheckTodoEvent.emit(todo);
   }
 
   onDeleteTodo(id: number | string): void {
