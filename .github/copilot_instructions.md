@@ -96,6 +96,16 @@ src/app/modules/
   - Exposes methods that dispatch actions (e.g., `getTodos()` dispatches `GET_TODOS`)
   - Components call sandbox methods and subscribe to sandbox observables, never call `store.dispatch()` directly
 
+### NgRx Store Boilerplate Template
+
+For complete boilerplate templates and examples for creating new store features, see [ngrx_boilerplate.md](./ngrx_boilerplate.md).
+
+**Quick Summary:**
+- **5 files needed**: Actions, Reducer, Selectors, Effects, Sandbox
+- **Pattern**: `ACTION`, `ACTIONSuccess`, `ACTIONFailure`
+- **State updates**: Always immutable (use spread operators)
+- **Component interaction**: Only through Sandbox (never direct store access)
+
 ### 📦 Imports (In Order)
 
 1. Angular imports
