@@ -101,6 +101,12 @@ src/app/modules/
 3. Local models
 4. Local services
 
+### 📝 Commit Message Format
+
+- **FEAT**: New components, features, or additions (e.g., `FEAT: add todo-status-badge component`)
+- **CHORE**: Updates, refactoring, dependencies (e.g., `CHORE: update rxjs to latest version`)
+- **FIX**: Bug fixes (e.g., `FIX: resolve todo deletion issue`)
+
 ---
 
 ## When Creating Something, Apply This Checklist
