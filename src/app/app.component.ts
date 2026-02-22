@@ -10,5 +10,5 @@ import { TodoModule } from './modules/todo/todo.module';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'vibe-todo-list';
+  title = 'taskflow';
 }
