@@ -5,7 +5,7 @@ import { ITodo, ITodoState } from '../models/todo.model';
 export const initialState: ITodoState = {
   todos: [] as ITodo[],
   loading: false,
-  error: null as any,
+  error: null,
 };
 
 const _todoReducer = createReducer(
@@ -19,9 +19,9 @@ const _todoReducer = createReducer(
 
   on(TODO_ACTIONS.GET_TODOS_Success, (state, { todos }) => ({
     ...state,
-    todos,
+    todos: todos as ITodo[],
     loading: false,
-    error: null,
+    error: null as string | null,
   })),
 
   on(TODO_ACTIONS.GET_TODOS_Failure, (state, { error }) => ({
@@ -58,7 +58,7 @@ const _todoReducer = createReducer(
   // * Delete All Todos
   on(TODO_ACTIONS.deleteAllTodosSuccess, (state) => ({
     ...state,
-    todos: [],
+    todos: [] as ITodo[],
   })),
   on(TODO_ACTIONS.deleteAllTodosFailure, (state, { error }) => ({
     ...state,
