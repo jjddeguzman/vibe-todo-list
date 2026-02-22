@@ -50,6 +50,7 @@ src/app/modules/
 - **Interfaces**: Prefix with `I` (e.g., `ITodo`, `IUser`, `ITodoState`)
 - **Classes**: Use PascalCase (e.g., `TodoService`, `UserComponent`)
 - **Enums**: Use PascalCase (e.g., `TodoStatus`, `UserRole`)
+- **Functions & Variables**: Use camelCase (e.g., `getTodos()`, `handleClick()`, `todoList`, `isLoading`)
 
 ### ⚙️ Component Rules (MUST)
 
