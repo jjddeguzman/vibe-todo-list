@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "taskflow": {
+    "vibe-todo-list": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/taskflow",
+            "outputPath": "dist/vibe-todo-list",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -62,10 +62,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "taskflow:build:production"
+              "buildTarget": "vibe-todo-list:build:production"
             },
             "development": {
-              "buildTarget": "taskflow:build:development"
+              "buildTarget": "vibe-todo-list:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,7 +73,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "taskflow:build"
+            "buildTarget": "vibe-todo-list:build"
           }
         },
         "test": {
