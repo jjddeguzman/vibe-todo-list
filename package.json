@@ -8,7 +8,7 @@
     "dev": "concurrently \"ng serve\" \"json-server --watch db.json --port 3000\"",
     "clean:install": "rimraf node_modules package-lock.json && npm install",
     "build": "ng build",
-    "deploy": "ng build --base-href=/task-flow/ && gh-pages -d dist/task-flow",
+    "deploy": "ng build --base-href=/task-flow/ && gh-pages -d dist/task-flow/browser",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "mock:api": "json-server --watch db.json --port 3000"
